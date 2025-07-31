@@ -9,7 +9,13 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true
+        unique: true,
+        lowercase: true,
+        validate: {
+            validator: function (v) {
+                return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v);
+            },
+            message: props => `${props.value} is not a valid email!`
     },
     id: {
         type: String,
@@ -20,13 +26,12 @@ const UserSchema = new mongoose.Schema({
     role: {
         type: String,
         required: true,
-        unique: true,
-        trim: true
+        enum: ['student', 'teacher', 'admin'],
+        default: 'student'
     },
-    Course: {
+    course: {
         type: String,
-        required: false,
-        trim: true
+        required: false
     }
 });
 

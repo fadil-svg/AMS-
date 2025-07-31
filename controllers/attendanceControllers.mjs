@@ -12,12 +12,12 @@ export const markAttendance = async (req, res) => {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    // Check if already marked today
+
     const existingRecord = await Attendance.findOne({
       id,
       Date: {
         $gte: today,
-        $lt: new Date(today.getTime() + 24 * 60 * 60 * 1000), // next day
+        $lt: new Date(today.getTime() + 24 * 60 * 60 * 1000),
       },
     });
 
@@ -25,7 +25,7 @@ export const markAttendance = async (req, res) => {
       return res.status(409).json({ error: 'Attendance already marked today.' });
     }
 
-    // Save new attendance record
+   
     const newAttendance = new Attendance({
       id,
       course,
