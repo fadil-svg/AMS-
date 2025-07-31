@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 dotenv.config();
+import seedAdmin from './controllers/admin.mjs';
 
+seedAdmin();
 import express from 'express';
 import cors from 'cors';
 
@@ -10,8 +12,9 @@ import adminRouter from './routes/admin.mjs';
 import connectToDatabase from './lib/mongoDB.mjs';
 connectToDatabase()
 
-import requireAdmin from './middleware/authMiddleware.mjs';
+
 import { registerStudent } from './controllers/addUsersControllers.mjs';
+import bodyParser from 'body-parser';
 
 const app = express();
 const PORT = 4000;
