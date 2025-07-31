@@ -5,12 +5,12 @@ import express from 'express';
 import cors from 'cors';
 
 import attendanceRouter from './routes/attendanceRoute.mjs';
-import authRouter from './routes/authRoute.mjs';
+import adminRouter from './routes/admin.mjs';
 
 import connectToDatabase from './lib/mongoDB.mjs';
 connectToDatabase()
 
-import { registerStudent } from './controllers/authController.mjs';
+import { registerStudent } from './controllers/addUsersControllers.mjs';
 
 const app = express();
 const PORT = 4000;
@@ -27,8 +27,8 @@ app.get("/", (req, res) =>{
     res.send("Hello World");
 });
 
-app.use('/api/auth/', authRouter);
-app.use('/api/attendance/', attendanceRouter);
+app.use('/api/admin/', adminRouter);
+app.use('/api/User/attendance/', attendanceRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`); 
