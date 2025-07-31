@@ -10,6 +10,7 @@ import adminRouter from './routes/admin.mjs';
 import connectToDatabase from './lib/mongoDB.mjs';
 connectToDatabase()
 
+import requireAdmin from './middleware/authMiddleware.mjs';
 import { registerStudent } from './controllers/addUsersControllers.mjs';
 
 const app = express();

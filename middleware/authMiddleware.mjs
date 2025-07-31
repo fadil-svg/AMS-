@@ -1,3 +1,4 @@
+import User from "../models/userModel.mjs";
 
 export const requireAdmin = async (req, res, next) => {
     try {
