@@ -1,4 +1,4 @@
-const adminDashboard = document.querySelector('.admin-dashboard')
+const adminDashboard = document.querySelector('.admin-dashboard');
 
 
 adminDashboard.addEventListener('click', function() {

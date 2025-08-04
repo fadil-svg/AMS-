@@ -9,7 +9,7 @@ const sections = document.querySelectorAll(".section");
 // });
 
  attendanceLog.addEventListener('click', function() {
-    window.location.href = "logs.html";
+    window.location.href = "logs.html"
  });
  attendanceLog.addEventListener('click', () => {
     const isActive = attendanceLog.classList.contains("bg-blue-500");
@@ -45,5 +45,55 @@ const sections = document.querySelectorAll(".section");
    new Chart(ctx, {
   type: 'bar',
   data: { labels: ['Jan', 'Feb'], datasets: [{ data: [10, 20] }] }
+
 });
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
+const ctx = document.getElementById('myChart').getContext('2d');
+
+const data = {
+  labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+  datasets: [
+    {
+      label: 'Active Users',
+      data: [65, 59, 80, 81],
+      backgroundColor: 'rgba(75, 192, 192, 0.5)',
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 1,
+      // you can set other dataset-specific options here
+    }
+  ]
+};
+
+const options = {
+  responsive: true, // auto resize
+  maintainAspectRatio: false, // if you want to control sizing via CSS
+  scales: {
+    y: {
+      beginAtZero: true,
+      title: {
+        display: true,
+        text: 'Users'
+      }
+    },
+    x: {
+      title: {
+        display: true,
+        text: 'Month'
+      }
+    }
+  },
+  plugins: {
+    tooltip: {
+      enabled: true,
+      callbacks: {
+        label: (ctx) => `${ctx.dataset.label}: ${ctx.formattedValue}`
+      }
+    },
+    legend: {
+      position: 'top'
+    }
+  }
+};
+
 
