@@ -53,7 +53,7 @@
       border: 1.5px solid #4fd1c5;
       box-shadow: 0 0 0 2px #b2f5ea;
     }
-    .manual-login-form button {
+    #submit-btn {
       width: 100%;
       background: #4fd1c5;
       color: #fff;

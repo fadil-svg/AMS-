@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manual Login page</title>
   <link rel="stylesheet" href="manual.css">
+  <script src="manual.js" defer></script>
 </head>
 <body>
   <div class="manual-login-container">
     <div class="manual-login-title">Manual Login Assist</div>
     <div class="manual-login-desc">Enter your ID to log in manually.</div>
     <form class="manual-login-form">
-      <label for="qr-id">Your Generated ID</label>
+      <label for="qr-id" id="qr-id-label">Your Generated ID</label>
       <input id="qr-id" placeholder="e.g., A1B2-C3D4-E5F6" required />
-      <button type="submit">Submit Login</button>
+      <button type="submit" id="submit-btn">Submit Login</button>
     </form>
   </div>
 </body>

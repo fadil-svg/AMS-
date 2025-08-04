@@ -14,7 +14,7 @@ A web-based system designed to streamline in-house employee check-ins, provide r
 
 ## 💻 Tech Stack
 
-- **Frontend:** React.js + Tailwind CSS
+- **Frontend:** HTML, CSS, JAVASCRIPT + Tailwind CSS
 - **Backend:** Node.js + Express.js
 - **Database:** MongoDB
 - **Authentication:** JWT (JSON Web Token)

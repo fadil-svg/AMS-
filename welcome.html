@@ -1,58 +1,33 @@
-<div id="status-toast" class="fixed top-20 left-0 right-0 mx-auto max-w-md bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-lg shadow-lg hidden transform transition-all duration-300 ease-in-out section-clickable">
-            <div id="status-success" class="flex items-center space-x-3 hidden section-clickable">
-                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-success/20 flex items-center justify-center">
-                    <i class="text-success" data-fa-i2svg=""><svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg></i>
-                </div>
-                <div class="flex-1" id="welcome-page">
-                    <h3 class="font-medium" contenteditable="false">Welcome, <span id="user-name" class="section-clickable" contenteditable="false">John Doe</span></h3>
-                    <p class="text-sm text-gray-300" contenteditable="false">You have signed in at <span id="sign-time" class="section-clickable" contenteditable="false">8:15 AM</span></p>
-                </div>
-            </div>
-            
-            <div id="status-signout" class="flex items-center space-x-3 hidden section-clickable">
-                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                    <i class="text-primary" data-fa-i2svg=""><svg class="svg-inline--fa fa-right-from-bracket" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="right-from-bracket" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></i>
-                </div>
-                <div class="flex-1">
-                    <h3 class="font-medium" contenteditable="false">Goodbye, <span id="signout-name" class="section-clickable" contenteditable="false">John Doe</span></h3>
-                    <p class="text-sm text-gray-300" contenteditable="false">Signed out successfully</p>
-                </div>
-            </div>
-            
-            <div id="status-error" class="flex items-center space-x-3 hidden section-clickable">
-                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-error/20 flex items-center justify-center">
-                    <i class="text-error" data-fa-i2svg=""><svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path></svg></i>
-                </div>
-                <div class="flex-1">
-                    <h3 class="font-medium" contenteditable="false">QR Code not recognized</h3>
-                    <p class="text-sm text-gray-300" contenteditable="false">Please try again or use manual entry</p>
-                </div>
-            </div>
-            
-            <div id="status-duplicate" class="flex items-center space-x-3 hidden section-clickable">
-                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-warning/20 flex items-center justify-center">
-                    <i class="text-warning" data-fa-i2svg=""><svg class="svg-inline--fa fa-exclamation" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="exclamation" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 512" data-fa-i2svg=""><path fill="currentColor" d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V320c0 17.7 14.3 32 32 32s32-14.3 32-32V64zM32 480a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"></path></svg></i>
-                </div>
-                <div class="flex-1">
-                    <h3 class="font-medium" contenteditable="false">Already scanned today</h3>
-                    <p class="text-sm text-gray-300" contenteditable="false">You've already signed in at <span id="previous-time" class="section-clickable" contenteditable="false">7:30 AM</span></p>
-                </div>
-            </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome, Fadil!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="welcome.css">
+</head>
+<body>
+  <main>
+    <div class="welcome-card">
+      <div class="welcome-header">
+        <div class="welcome-title">Welcome, Fadil!</div>
+        <div class="welcome-desc">Your session details are below.</div>
+      </div>
+      <div class="welcome-session">
+        <div class="session-details">
+          <p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Checked in at 10:51 AM
+          </p>
         </div>
-
-        <!-- Manual Entry Button -->
-        <div id="manual-entry" class="mt-4 text-center section-clickable">
-            <button id="manual-entry-btn" class="text-primary hover:text-primary/80 transition flex items-center mx-auto section-clickable">
-                <span contenteditable="false">Can't scan? Enter ID manually</span>
-                <i class="ml-1 text-xs" data-fa-i2svg=""><svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></i>
-            </button>
-        </div>
-    </main>
-
-    <!-- Manual Entry Modal (Initially Hidden) -->
-    <div id="manual-entry-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden cursor-default-must">
-        <div class="bg-gray-900 border border-gray-800 rounded-xl w-full max-w-md mx-4 p-6 shadow-2xl">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-semibold" contenteditable="false">Manual Sign In/Out</h2>
-                <button id="close-modal" class="text-gray-400 hover:text-white section-clickable">
-                    <i data-fa-i2svg=""><svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path></svg></i>
+      </div>
+      <div class="welcome-footer">
+        <button class="new-session-btn" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2 4 4-4 4"></path><path d="M3 11v-1a4 4 0 0 1 4-4h14"></path><path d="m7 22-4-4 4-4"></path><path d="M21 13v1a4 4 0 0 1-4 4H3"></path></svg>
+          New Session
+        </button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
