@@ -1,4 +1,4 @@
-import courseSchema from "../models/courseSchema.mjs";
+import Course from "../models/coursesModel.mjs";
 
 export const createCourse = async (req, res) => {
     try {
