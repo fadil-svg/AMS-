@@ -6,6 +6,7 @@ import {requireAdmin} from '../middleware/authMiddleware.mjs';
 import { bulkDeleteUsers } from "../controllers/deleteUser.mjs";
 import { loginAdmin } from '../controllers/adminLogin.mjs';
 import { createCourse, getCourses, getCourseById, deleteCourse} from "../controllers/coursesController.mjs";
+import { getAttendance } from "../controllers/attendance.mjs";
 
 const adminRouter = Router();
 adminRouter.post('/login', loginAdmin);
@@ -16,6 +17,7 @@ adminRouter.delete('/bulk-delete', bulkDeleteUsers);
 adminRouter.post('/create-course', createCourse);
 adminRouter.get('/get-courses', getCourses);
 adminRouter.get('/get-course/:id', getCourseById);
+adminRouter.get('/attendance', getAttendance);
 adminRouter.delete('/delete-course/:id', deleteCourse);
 
 
