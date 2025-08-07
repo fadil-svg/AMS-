@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html class="fontawesome-i2svg-active fontawesome-i2svg-complete">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>tailwind.config = {
+  "theme": {
+    "extend": {
+      "colors": {
+        "primary": "#3B82F6",
+        "success": "#10B981",
+        "error": "#EF4444",
+        "warning": "#F59E0B",
+        "dark": "#0F172A"
+      },
+      "fontFamily": {
+        "sans": [
+          "Inter",
+          "sans-serif"
+        ]
+      },
+      "animation": {
+        "pulse-border": "pulse-border 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "scan-line": "scan-line 2s linear infinite",
+        "fade-in": "fade-in 0.5s ease-in-out",
+        "slide-up": "slide-up 0.3s ease-out"
+      },
+      "keyframes": {
+        "pulse-border": {
+          "0%, 100%": {
+            "borderColor": "rgba(59, 130, 246, 0.5)"
+          },
+          "50%": {
+            "borderColor": "rgba(59, 130, 246, 1)"
+          }
+        },
+        "scan-line": {
+          "0%": {
+            "transform": "translateY(0%)"
+          },
+          "50%": {
+            "transform": "translateY(100%)"
+          },
+          "50.1%": {
+            "transform": "translateY(0%)"
+          },
+          "100%": {
+            "transform": "translateY(100%)"
+          }
+        },
+        "fade-in": {
+          "0%": {
+            "opacity": "0"
+          },
+          "100%": {
+            "opacity": "1"
+          }
+        },
+        "slide-up": {
+          "0%": {
+            "transform": "translateY(10px)",
+            "opacity": "0"
+          },
+          "100%": {
+            "transform": "translateY(0)",
+            "opacity": "1"
+          }
+        }
+      },
+      "backdropFilter": {
+        "none": "none",
+        "blur": "blur(20px)"
+      }
+    }
+  }
+};</script>
+    <style>
+        .scanner-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #3B82F6, transparent);
+            animation: scan-line 2s linear infinite;
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.8);
+        }
+        
+        @keyframes scan-line {
+            0% { top: 0; }
+            50% { top: 100%; }
+            50.1% { top: 0; }
+            100% { top: 100%; }
+        }
+        
+        .toast-enter {
+            animation: toast-enter 0.5s ease forwards;
+        }
+        
+        @keyframes toast-enter {
+            0% { transform: translateY(-20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .error-message {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #EF4444;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: none;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&display=swap">
+    <style>
+      body {
+        font-family: 'Inter', sans-serif !important;
+      }
+      
+      /* Preserve Font Awesome icons */
+      .fa, .fas, .far, .fal, .fab {
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+      }
+    </style>
+</head>
+<body class="bg-dark font-sans text-white min-h-screen">
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 bg-dark/80 backdrop-blur-md z-50 border-b border-gray-800">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <button id="back-button" class="p-2 rounded-full hover:bg-gray-800 transition">
+                    <i class="fas fa-arrow-left text-gray-300"></i>
+                </button>
+                <div class="flex items-center">
+                    <div class="h-8 w-8 bg-primary rounded-md flex items-center justify-center">
+                        <i class="fas fa-qrcode text-white"></i>
+                    </div>
+                    <h1 class="ml-2 text-lg font-semibold">Scan to Sign In/Out</h1>
+                </div>
+            </div>
+            <div>
+                <button id="toggle-camera" class="p-2 rounded-full hover:bg-gray-800 transition" disabled>
+                    <i class="fas fa-camera-rotate text-gray-300"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="pt-20 pb-16 px-4 flex flex-col items-center justify-start min-h-screen">
+        <!-- Error Message -->
+        <div id="error-message" class="error-message w-full max-w-md">
+            <div class="flex items-center">
+                <i class="fas fa-exclamation-triangle mr-2"></i>
+                <span id="error-text">Camera access denied. Please allow camera permissions to scan QR codes.</span>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div id="instructions" class="text-center mb-6 animate-slide-up">
+            <p class="text-gray-300 text-lg">Hold your QR code within the frame</p>
+            <p class="text-gray-400 text-sm mt-1">Make sure it's well-lit and clearly visible</p>
+        </div>
+        
+        <!-- Scanner Area -->
+        <div id="scanner-area" class="relative w-full max-w-md aspect-square mb-8">
+            <div class="absolute inset-0 bg-black/20 backdrop-blur-sm rounded-xl overflow-hidden">
+                <div id="reader" class="w-full h-full"></div>
+            </div>
+            
+            <!-- Scanner Frame -->
+            <div class="scanner-container absolute inset-0 border-2 border-primary rounded-xl animate-pulse-border overflow-hidden">
+                <div class="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-primary"></div>
+                <div class="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-primary"></div>
+                <div class="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-primary"></div>
+                <div class="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-primary"></div>
+            </div>
+        </div>
+
+        <!-- Status Toast (Initially Hidden) -->
+        <div id="status-toast" class="fixed top-20 left-0 right-0 mx-auto max-w-md bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-lg shadow-lg hidden transform transition-all duration-300 ease-in-out">
+            <div id="status-success" class="flex items-center space-x-3 hidden">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-success/20 flex items-center justify-center">
+                    <i class="fas fa-check text-success"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Welcome, <span id="user-name">John Doe</span></h3>
+                    <p class="text-sm text-gray-300">You have signed in at <span id="sign-time">8:15 AM</span></p>
+                </div>
+            </div>
+            
+            <div id="status-signout" class="flex items-center space-x-3 hidden">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                    <i class="fas fa-right-from-bracket text-primary"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Goodbye, <span id="signout-name">John Doe</span></h3>
+                    <p class="text-sm text-gray-300">Signed out successfully</p>
+                </div>
+            </div>
+            
+            <div id="status-error" class="flex items-center space-x-3 hidden">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-error/20 flex items-center justify-center">
+                    <i class="fas fa-xmark text-error"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">QR Code not recognized</h3>
+                    <p class="text-sm text-gray-300">Please try again or use manual entry</p>
+                </div>
+            </div>
+            
+            <div id="status-duplicate" class="flex items-center space-x-3 hidden">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-warning/20 flex items-center justify-center">
+                    <i class="fas fa-exclamation text-warning"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-medium">Already scanned today</h3>
+                    <p class="text-sm text-gray-300">You've already signed in at <span id="previous-time">7:30 AM</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manual Entry Button -->
+        <div id="manual-entry" class="mt-4 text-center">
+            <button id="manual-entry-btn" class="text-primary hover:text-primary/80 transition flex items-center mx-auto">
+                <span>Can't scan? Enter ID manually</span>
+                <i class="fas fa-chevron-right ml-1 text-xs"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Manual Entry Modal (Initially Hidden) -->
+    <div id="manual-entry-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-gray-900 border border-gray-800 rounded-xl w-full max-w-md mx-4 p-6 shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold">Manual Sign In/Out</h2>
+                <button id="close-modal" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </div>
+            
+            <form id="manual-form">
+                <div class="mb-4">
+                    <label for="student-id" class="block text-sm font-medium text-gray-300 mb-1">Student ID</label>
+                    <input type="text" id="student-id" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter your student ID" required minlength="3" maxlength="20">
+                    <div id="input-error" class="text-error text-sm mt-1 hidden">Please enter a valid student ID (3-20 characters)</div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Action</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button type="button" id="sign-in-btn" class="bg-primary/20 border border-primary/40 text-primary rounded-lg py-3 hover:bg-primary/30 transition focus:outline-none focus:ring-2 focus:ring-primary" data-action="signin">
+                            <i class="fas fa-right-to-bracket mr-2"></i>Sign In
+                        </button>
+                        <button type="button" id="sign-out-btn" class="bg-gray-800 border border-gray-700 text-gray-300 rounded-lg py-3 hover:bg-gray-700 transition focus:outline-none focus:ring-2 focus:ring-gray-600" data-action="signout">
+                            <i class="fas fa-right-from-bracket mr-2"></i>Sign Out
+                        </button>
+                    </div>
+                </div>
+                
+                <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-primary">
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+
+     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let html5QrcodeScanner = null;
+            let availableCameras = [];
+            let currentCameraIndex = 0;
+            let isScanning = false;
+            let scanInProgress = false;
+            let selectedAction = 'signin';
+            
+            // Initialize the app
+            initializeApp();
+            
+            async function initializeApp() {
+                try {
+                    await initializeCameras();
+                    await startScanner();
+                } catch (error) {
+                    handleCameraError(error);
+                }
+            }
+            
+            async function initializeCameras() {
+                try {
+                    availableCameras = await Html5Qrcode.getCameras();
+                    if (availableCameras.length === 0) {
+                        throw new Error('No cameras found on this device');
+                    }
+                    
+                    // Enable camera toggle if multiple cameras available
+                    const toggleBtn = document.getElementById('toggle-camera');
+                    if (availableCameras.length > 1) {
+                        toggleBtn.disabled = false;
+                        toggleBtn.addEventListener('click', switchCamera);
+                    }
+                    
+                } catch (error) {
+                    throw new Error('Failed to access cameras: ' + error.message);
+                }
+            }
+            
+            async function startScanner() {
+                if (html5QrcodeScanner) {
+                    await stopScanner();
+                }
+                
+                try {
+                    html5QrcodeScanner = new Html5Qrcode("reader");
+                    const cameraId = availableCameras[currentCameraIndex].id;
+                    const qrConfig = { fps: 10, qrbox: { width: 350, height: 350 } };
+                    
+                    await html5QrcodeScanner.start(
+                        cameraId,
+                        qrConfig,
+                        onScanSuccess,
+                        onScanFailure
+                    );
+                    
+                    isScanning = true;
+                    hideError();
+                    
+                } catch (error) {
+                    throw new Error('Failed to start scanner: ' + error.message);
+                }
+            }
+            
+            async function stopScanner() {
+                if (html5QrcodeScanner && isScanning) {
+                    try {
+                        await html5QrcodeScanner.stop();
+                        html5QrcodeScanner = null;
+                        isScanning = false;
+                    } catch (error) {
+                        console.warn('Error stopping scanner:', error);
+                    }
+                }
+            }
+            
+            async function switchCamera() {
+                if (availableCameras.length <= 1) return;
+                
+                try {
+                    await stopScanner();
+                    currentCameraIndex = (currentCameraIndex + 1) % availableCameras.length;
+                    await startScanner();
+                } catch (error) {
+                    handleCameraError(error);
+                }
+            }
+            
+            function onScanSuccess(decodedText, decodedResult) {
+                // Prevent multiple rapid scans
+                if (scanInProgress) return;
+                scanInProgress = true;
+                
+                // Vibrate if supported
+                if (navigator.vibrate) {
+                    navigator.vibrate(200);
+                }
+                
+                // Pause scanner temporarily
+                if (html5QrcodeScanner && isScanning) {
+                    html5QrcodeScanner.pause();
+                }
+                
+                console.log(`QR Code detected: ${decodedText}`);
+                
+                // Validate QR code format (basic validation)
+                if (!isValidQRCode(decodedText)) {
+                    showToast('error');
+                    resumeScanning();
+                    return;
+                }
+                
+                // Process the scan result
+                processQRCode(decodedText);
+            }
+            
+            function onScanFailure(error) {
+                // Silently handle scan failures - they're normal during scanning
+            }
+            
+            function isValidQRCode(code) {
+                // Basic validation - adjust according to your QR code format
+                return code && code.length >= 3 && code.length <= 50;
+            }
+            
+            function processQRCode(code) {
+                // Simulate API call with different scenarios
+                const scenarios = ['success', 'signout', 'duplicate', 'error'];
+                const randomScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+                
+                // Show appropriate toast
+                showToast(randomScenario, code);
+                
+                // Resume scanning after delay
+                setTimeout(() => {
+                    resumeScanning();
+                }, 3000);
+            }
+            
+            function resumeScanning() {
+                scanInProgress = false;
+                if (html5QrcodeScanner && isScanning) {
+                    try {
+                        html5QrcodeScanner.resume();
+                    } catch (error) {
+                        console.warn('Error resuming scanner:', error);
+                    }
+                }
+            }
+            
+            function handleCameraError(error) {
+                console.error('Camera error:', error);
+                showError(error.message);
+                
+                // Disable camera toggle on error
+                const toggleBtn = document.getElementById('toggle-camera');
+                toggleBtn.disabled = true;
+            }
+            
+            function showError(message) {
+                const errorDiv = document.getElementById('error-message');
+                const errorText = document.getElementById('error-text');
+                errorText.textContent = message;
+                errorDiv.style.display = 'block';
+            }
+            
+            function hideError() {
+                const errorDiv = document.getElementById('error-message');
+                errorDiv.style.display = 'none';
+            }
+            
+            // Toast management (improved)
+            function showToast(type, qrData = null) {
+                const toast = document.getElementById('status-toast');
+                const success = document.getElementById('status-success');
+                const signout = document.getElementById('status-signout');
+                const error = document.getElementById('status-error');
+                const duplicate = document.getElementById('status-duplicate');
+                
+                // Hide all states first
+                [success, signout, error, duplicate].forEach(el => el.classList.add('hidden'));
+                
+                // Set current time
+                const now = new Date();
+                const timeString = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+                
+                // Show appropriate state
+                switch(type) {
+                    case 'success':
+                        document.getElementById('user-name').textContent = getNameFromQR(qrData) || 'Jane Smith';
+                        document.getElementById('sign-time').textContent = timeString;
+                        success.classList.remove('hidden');
+                        break;
+                    case 'signout':
+                        document.getElementById('signout-name').textContent = getNameFromQR(qrData) || 'Jane Smith';
+                        signout.classList.remove('hidden');
+                        break;
+                    case 'error':
+                        error.classList.remove('hidden');
+                        break;
+                    case 'duplicate':
+                        document.getElementById('previous-time').textContent = '7:30 AM';
+                        duplicate.classList.remove('hidden');
+                        break;
+                }
+                
+                // Show toast with animation
+                toast.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    toast.classList.add('toast-enter');
+                });
+                
+                // Hide toast after delay
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                    toast.classList.remove('toast-enter');
+                }, 3000);
+            }
+            
+            function getNameFromQR(qrData) {
+                // Extract name from QR code data if available
+                // This is a placeholder - adjust according to your QR format
+                return qrData ? `Student ${qrData.substring(0, 5)}` : null;
+            }
+            
+            // Modal management (improved)
+            const manualEntryBtn = document.getElementById('manual-entry-btn');
+            const manualEntryModal = document.getElementById('manual-entry-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            
+            manualEntryBtn.addEventListener('click', openModal);
+            closeModalBtn.addEventListener('click', closeModal);
+            
+            // Close modal on outside click
+            manualEntryModal.addEventListener('click', (e) => {
+                if (e.target === manualEntryModal) {
+                    closeModal();
+                }
+            });
+            
+            // Close modal on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !manualEntryModal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+            
+            function openModal() {
+                manualEntryModal.classList.remove('hidden');
+                document.getElementById('student-id').focus();
+            }
+            
+            function closeModal() {
+                manualEntryModal.classList.add('hidden');
+                document.getElementById('manual-form').reset();
+                hideInputError();
+                resetActionButtons();
+            }
+            
+            // Action button toggle (improved)
+            const signInBtn = document.getElementById('sign-in-btn');
+            const signOutBtn = document.getElementById('sign-out-btn');
+            
+            signInBtn.addEventListener('click', () => selectAction('signin'));
+            signOutBtn.addEventListener('click', () => selectAction('signout'));
+            
+            function selectAction(action) {
+                selectedAction = action;
+                
+                if (action === 'signin') {
+                    signInBtn.classList.remove('bg-gray-800', 'border-gray-700', 'text-gray-300');
+                    signInBtn.classList.add('bg-primary/20', 'border-primary/40', 'text-primary');
+                    
+                    signOutBtn.classList.remove('bg-primary/20', 'border-primary/40', 'text-primary');
+                    signOutBtn.classList.add('bg-gray-800', 'border-gray-700', 'text-gray-300');
+                } else {
+                    signOutBtn.classList.remove('bg-gray-800', 'border-gray-700', 'text-gray-300');
+                    signOutBtn.classList.add('bg-primary/20', 'border-primary/40', 'text-primary');
+                    
+                    signInBtn.classList.remove('bg-primary/20', 'border-primary/40', 'text-primary');
+                    signInBtn.classList.add('bg-gray-800', 'border-gray-700', 'text-gray-300');
+                }
+            }
+            
+            function resetActionButtons() {
+                selectedAction = 'signin';
+                selectAction('signin');
+            }
+            
+            // Form validation and submission (improved)
+            document.getElementById('manual-form').addEventListener('submit', handleFormSubmit);
+            document.getElementById('student-id').addEventListener('input', hideInputError);
+            
+            function handleFormSubmit(e) {
+                e.preventDefault();
+                
+                const studentId = document.getElementById('student-id').value.trim();
+                
+                if (!isValidStudentId(studentId)) {
+                    showInputError();
+                    return;
+                }
+                
+                // Process manual entry
+                closeModal();
+                const toastType = selectedAction === 'signin' ? 'success' : 'signout';
+                showToast(toastType, studentId);
+            }
+            
+            function isValidStudentId(id) {
+                return id.length >= 3 && id.length <= 20 && /^[a-zA-Z0-9]+$/.test(id);
+            }
+            
+            function showInputError() {
+                document.getElementById('input-error').classList.remove('hidden');
+                document.getElementById('student-id').classList.add('border-error');
+            }
+            
+            function hideInputError() {
+                document.getElementById('input-error').classList.add('hidden');
+                document.getElementById('student-id').classList.remove('border-error');
+            }
+            
+            // Cleanup on page unload
+            window.addEventListener('beforeunload', () => {
+                stopScanner();
+            });
+        });
+    </script>
+</body>
+</html>

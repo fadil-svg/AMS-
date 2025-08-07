@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -16,8 +17,9 @@ const UserSchema = new mongoose.Schema({
                 return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v);
             },
             message: props => `${props.value} is not a valid email!`
+        }
     },
-    id: {
+    studentId: {    
         type: String,
         required: true,
         unique: true,
@@ -33,7 +35,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: false
     }
-}
 });
 
 const User = mongoose.model('User', UserSchema);

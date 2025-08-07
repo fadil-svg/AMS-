@@ -9,14 +9,14 @@ import { createCourse, getCourses, getCourseById, deleteCourse} from "../control
 
 const adminRouter = Router();
 adminRouter.post('/login', loginAdmin);
-adminRouter.post('/register', requireAdmin, registerStudent);
-adminRouter.get('/get-users/:userId', requireAdmin, getUserById);
+adminRouter.post('/register',  registerStudent);
+adminRouter.get('/get-users/:userId', getUserById);
 adminRouter.put('/update-users/:userId', requireAdmin, updateUser);
-adminRouter.delete('/bulk-delete', requireAdmin, bulkDeleteUsers);
-adminRouter.post('/create-course', requireAdmin, createCourse);
-adminRouter.get('/get-courses', requireAdmin, getCourses);
-adminRouter.get('/get-course/:id', requireAdmin, getCourseById);
-adminRouter.delete('/delete-course/:id', requireAdmin, deleteCourse);
+adminRouter.delete('/bulk-delete', bulkDeleteUsers);
+adminRouter.post('/create-course', createCourse);
+adminRouter.get('/get-courses', getCourses);
+adminRouter.get('/get-course/:id', getCourseById);
+adminRouter.delete('/delete-course/:id', deleteCourse);
 
 
 export default adminRouter;
