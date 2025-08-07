@@ -91,10 +91,10 @@
   const name = params.get('name') || 'Guest';
 
 
-  function names(){
+  // function names(){
     const names = ['Fadil', 'Hoseah', 'Zipporah', 'Taofeeq'];
-    return names;
-  }
+  //   return names;
+  // }
   
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -102,9 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const card = document.querySelector('.card');
     const muted = document.querySelector('.muted');
 
-  if (names().includes(name)) {
-      document.title = `Checkin - ${names()[0]}`;
-      headline.textContent = `✅ Welcome, ${names()[0]}!`
+  if (names.includes(name)) {
+      document.title = `Checkin - ${name}`;
+      headline.textContent = `✅ Welcome, ${name}!`
       muted.textContent = `You have successfully checked in.`;
       headline.style.display = 'block';
       card.style.display = 'block';
