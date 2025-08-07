@@ -91,6 +91,7 @@
                     if (result.success) {
                         toastMessage.textContent =  result.message;
                         toastParagraph.textContent = result.message;
+                        
                         showToast(result.message);
                         closeCamera();
                     } else if (result.error) {
