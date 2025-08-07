@@ -78,7 +78,7 @@
         <div class="headline">Welcome</div>
       </div>
       <div class="card-body">
-        <p class="muted">You have successfully checked in at .</p>
+        <p class="muted">You have successfully checked in at </p>
       </div>
       
 
@@ -108,6 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
       muted.textContent = `You have successfully checked in.`;
       headline.style.display = 'block';
       card.style.display = 'block';
+
+      if (timeElement) {
+        timeElement.textContent = `Check-in Time: ${currentTime}`;
+      }
 
   } else {
      window.location.href = "not-eligible.html";
