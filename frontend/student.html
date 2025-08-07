@@ -208,43 +208,12 @@
                         <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
                             <div>
                                 <label class="text-xs text-gray-500 block mb-1" contenteditable="false">Role</label>
-                                <select class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 w-full">
-                                    <option>All Roles</option>
-                                    <option>Students</option>
-                                    <option>Teachers</option>
-                                    <option>Administrators</option>
+                                <select id="role-filter" class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 w-full">
+                                    <option value="all">All Roles</option>
+                                    <option value="Student">Students</option>
+                                    <option value="Teacher">Teachers</option>
                                 </select>
                             </div>
-                            <div>
-                                <label class="text-xs text-gray-500 block mb-1" contenteditable="false">Class</label>
-                                <select class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 w-full">
-                                    <option>All Classes</option>
-                                    <option>Class 10-A</option>
-                                    <option>Class 10-B</option>
-                                    <option>Class 11-A</option>
-                                    <option>Class 11-B</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="text-xs text-gray-500 block mb-1" contenteditable="false">Status</label>
-                                <select class="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 w-full">
-                                    <option>All Status</option>
-                                    <option>Active</option>
-                                    <option>Inactive</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="flex gap-2 w-full md:w-auto">
-                            <button class="bg-primary-600 text-white px-4 py-2 rounded-md text-sm hover:bg-primary-700 transition-colors flex-1 md:flex-none" contenteditable="false">
-                                Apply Filters
-                            </button>
-                            <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-md text-sm hover:bg-gray-200 transition-colors" contenteditable="false">
-                                Reset
-                            </button>
-                            <button class="bg-accent-green text-white px-4 py-2 rounded-md text-sm hover:bg-green-700 transition-colors flex items-center gap-1" contenteditable="false">
-                                <i class="text-xs" data-fa-i2svg=""><svg class="svg-inline--fa fa-plus" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg></i>
-                                Add New
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -287,149 +256,6 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
-                                <!-- Student Row -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="p-4">
-                                        <input type="checkbox" class="rounded text-primary-600 focus:ring-primary-500">
-                                    </td>
-                                    <td class="p-4 flex items-center">
-                                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 mr-3">
-                                            <i data-fa-i2svg=""><svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path></svg></i>
-                                        </div>
-                                        <div>
-                                            <div class="text-sm font-medium text-gray-900" contenteditable="false">Obed Zipporah Waziri</div>
-                                            <div class="text-xs text-gray-500" contenteditable="false">Student</div>
-                                        </div>
-                                    </td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">STU-1001</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">Student</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">Class 10-A</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">zipporahwaziri0@gmail.com</td>
-                                    <td class="p-4">
-                                        <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800" contenteditable="false">Active</span>
-                                    </td>
-                                    <td class="p-4 text-sm">
-                                        <button class="text-gray-500 hover:text-gray-700">
-                                            <i data-fa-i2svg=""><svg class="svg-inline--fa fa-ellipsis-vertical" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" data-fa-i2svg=""><path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path></svg></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                
-                                <!-- Teacher Row -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="p-4">
-                                        <input type="checkbox" class="rounded text-primary-600 focus:ring-primary-500">
-                                    </td>
-                                    <td class="p-4 flex items-center">
-                                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 mr-3">
-                                            <i data-fa-i2svg=""><svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path></svg></i>
-                                        </div>
-                                        <div>
-                                            <div class="text-sm font-medium text-gray-900" contenteditable="false">Vandu Linus Daniel</div>
-                                            <div class="text-xs text-gray-500" contenteditable="false">Teacher</div>
-                                        </div>
-                                    </td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">TCH-2001</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">Teacher</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">Class 10-A</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">vandulinus@gmail.com</td>
-                                    <td class="p-4">
-                                        <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800" contenteditable="false">Active</span>
-                                    </td>
-                                    <td class="p-4 text-sm">
-                                        <button class="text-gray-500 hover:text-gray-700">
-                                            <i data-fa-i2svg=""><svg class="svg-inline--fa fa-ellipsis-vertical" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" data-fa-i2svg=""><path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path></svg></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                
-                                <!-- Administrator Row -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="p-4">
-                                        <input type="checkbox" class="rounded text-primary-600 focus:ring-primary-500">
-                                    </td>
-                                    <td class="p-4 flex items-center">
-                                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 mr-3">
-                                            <i data-fa-i2svg=""><svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path></svg></i>
-                                        </div>
-                                        <div>
-                                            <div class="text-sm font-medium text-gray-900" contenteditable="false">Dorathy Paul</div>
-                                            <div class="text-xs text-gray-500" contenteditable="false">Administrator</div>
-                                        </div>
-                                    </td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">ADM-3001</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">Administrator</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">-</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">pauldorathy@gmail.com</td>
-                                    <td class="p-4">
-                                        <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800" contenteditable="false">Active</span>
-                                    </td>
-                                    <td class="p-4 text-sm">
-                                        <button class="text-gray-500 hover:text-gray-700">
-                                            <i data-fa-i2svg=""><svg class="svg-inline--fa fa-ellipsis-vertical" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" data-fa-i2svg=""><path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path></svg></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                
-                                <!-- Inactive Student Row -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="p-4">
-                                        <input type="checkbox" class="rounded text-primary-600 focus:ring-primary-500">
-                                    </td>
-                                    <td class="p-4 flex items-center">
-                                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 mr-3">
-                                            <i data-fa-i2svg=""><svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path></svg></i>
-                                        </div>
-                                        <div>
-                                            <div class="text-sm font-medium text-gray-900" contenteditable="false">Cosmos Michael</div>
-                                            <div class="text-xs text-gray-500" contenteditable="false">Student</div>
-                                        </div>
-                                    </td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">STU-1004</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">Student</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">Class 11-A</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">cosmos.m@example.com</td>
-                                    <td class="p-4">
-                                        <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800" contenteditable="false">Inactive</span>
-                                    </td>
-                                    <td class="p-4 text-sm">
-                                        <button class="text-gray-500 hover:text-gray-700">
-                                            <i data-fa-i2svg=""><svg class="svg-inline--fa fa-ellipsis-vertical" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" data-fa-i2svg=""><path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path></svg></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                
-                                <!-- Teacher Row -->
-                                <tr class="hover:bg-gray-50">
-                                    <td class="p-4">
-                                        <input type="checkbox" class="rounded text-primary-600 focus:ring-primary-500">
-                                    </td>
-                                    <td class="p-4 flex items-center">
-                                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 mr-3">
-                                            <i data-fa-i2svg=""><svg class="svg-inline--fa fa-user" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path></svg></i>
-                                        </div>
-                                        <div>
-                                            <div class="text-sm font-medium text-gray-900" contenteditable="false">Olivia Davis</div>
-                                            <div class="text-xs text-gray-500" contenteditable="false">Teacher</div>
-                                        </div>
-                                    </td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">TCH-2002</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">Teacher</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">Class 11-B</td>
-                                    <td class="p-4 text-sm text-gray-600" contenteditable="false">olivia.d@example.com</td>
-                                    <td class="p-4">
-                                        <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800" contenteditable="false">Active</span>
-                                    </td>
-                                    <td class="p-4 text-sm">
-                                        <button class="text-gray-500 hover:text-gray-700">
-                                            <i data-fa-i2svg=""><svg class="svg-inline--fa fa-ellipsis-vertical" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" data-fa-i2svg=""><path fill="currentColor" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"></path></svg></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
                     <!-- Pagination -->
                     <div class="p-4 border-t border-gray-200 flex items-center justify-between">
                         <div class="text-sm text-gray-500" contenteditable="false">
@@ -469,6 +295,94 @@
                 document.documentElement.classList.remove('dark');
             }
         });
+        
+        async function fetchAndRenderPeople() {
+           
+            try {
+                const response = await fetch('http://localhost:4000/api/admin/get-users');
+                const data = await response.json();
+                // If your API returns an array of students
+                const people = Array.isArray(data) ? data : (data.students || []);
+                const tbody = document.currentScript.parentElement;
+                tbody.innerHTML = people.map(person => `
+                <tr>
+                    <td class="p-4"><input type="checkbox" class="rounded text-primary-600 focus:ring-primary-500"></td>
+                    <td class="p-4">${person.name || ''}</td>
+                        <td class="p-4">${person.id || ''}</td>
+                        <td class="p-4">${person.role || ''}</td>
+                        <td class="p-4">${person.class || ''}</td>
+                        <td class="p-4">${person.email || ''}</td>
+                        <td class="p-4">
+                            <span class="px-2 py-1 rounded-full text-xs font-semibold ${person.status === 'Active' ? 'bg-accent-green text-white' : 'bg-accent-red text-white'}">
+                                ${person.status || ''}
+                            </span>
+                        </td>
+                        <td class="p-4">
+                            <button class="text-blue-500 hover:underline text-xs mr-2">Edit</button>
+                            <button class="text-red-500 hover:underline text-xs">Delete</button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (e) {
+                const tbody = document.currentScript.parentElement;
+                tbody.innerHTML = `<tr><td colspan="8" class="p-4 text-red-500">Failed to load data.</td></tr>`;
+            }
+        }
+        fetchAndRenderPeople();
+        
+            // Filtering logic
+            const roleFilter = document.getElementById('role-filter');
+            let allPeople = [];
+
+            // async function fetchAndRenderPeople(role = 'all') {
+            //     const endpoint = 'http://localhost:4000/api/admin/get-users';
+            //     try {
+            //         const response = await fetch(endpoint + '/students');
+            //         const data = await response.json();
+            //         allPeople = Array.isArray(data) ? data : (data.students || []);
+            //         renderPeople(role);
+            //     } catch (e) {
+            //         const tbody = document.querySelector('#people-table tbody');
+            //         if (tbody) {
+            //             tbody.innerHTML = `<tr><td colspan="8" class="p-4 text-red-500">Failed to load data.</td></tr>`;
+            //         }
+            //     }
+            // }
+
+            // function renderPeople(role = 'all') {
+            //     const tbody = document.querySelector('#people-table tbody');
+            //     if (!tbody) return;
+            //     let filtered = allPeople;
+            //     if (role !== 'all') {
+            //         filtered = allPeople.filter(p => (p.role || '').toLowerCase() === role.toLowerCase());
+            //     }
+            //     tbody.innerHTML = filtered.map(person => `
+            //         <tr>
+            //             <td class="p-4"><input type="checkbox" class="rounded text-primary-600 focus:ring-primary-500"></td>
+            //             <td class="p-4">${person.name || ''}</td>
+            //             <td class="p-4">${person.id || ''}</td>
+            //             <td class="p-4">${person.role || ''}</td>
+            //             <td class="p-4">${person.class || ''}</td>
+            //             <td class="p-4">${person.email || ''}</td>
+            //             <td class="p-4">
+            //                 <span class="px-2 py-1 rounded-full text-xs font-semibold ${person.status === 'Active' ? 'bg-accent-green text-white' : 'bg-accent-red text-white'}">
+            //                     ${person.status || ''}
+            //                 </span>
+            //             </td>
+            //             <td class="p-4">
+            //                 <button class="text-blue-500 hover:underline text-xs mr-2">Edit</button>
+            //                 <button class="text-red-500 hover:underline text-xs">Delete</button>
+            //             </td>
+            //         </tr>
+            //     `).join('') || `<tr><td colspan="8" class="p-4 text-gray-500">No data found.</td></tr>`;
+            // }
+
+            // roleFilter.addEventListener('change', function() {
+            //     renderPeople(this.value);
+            // });
+
+            // fetchAndRenderPeople();
+        
     </script>
 
 </body></html>
