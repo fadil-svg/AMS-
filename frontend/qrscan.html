@@ -74,7 +74,7 @@
                     const userId = userObject.id;
                     console.log("User ID:", userId);
 
-                    const response = await fetch("http://localhost:4000/api/User/attendance/mark", {
+                    const response = await fetch("https://amsbackend-xx23.onrender.com/api/User/attendance/mark", {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
