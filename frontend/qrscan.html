@@ -130,7 +130,7 @@
                         closeCamera();
                             // ✅ Redirect to the check-in page after a brief pause
                      setTimeout(() => {
-                   window.location.href = 'checkin.html';
+                    window.location.href = 'checkin.html';
                     }, 1500); // 1.5 seconds delay for toast visibility
 
                     } else if (result.error) {
@@ -143,10 +143,12 @@
 
                     } else {
                         showToast("Failed to mark attendance. Please try again.");
+
                     }
                 } catch (error) {
                     console.error("Error marking attendance:", error);
                      showToast("Error marking attendance. Please try again.");
+                     window.location.href = 'not-eligible.html';
                 };
             };
 
