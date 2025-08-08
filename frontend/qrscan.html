@@ -91,6 +91,10 @@
                     if (result.success) {
                         toastMessage.textContent =  result.message;
                         toastParagraph.textContent = result.message;
+                        window.location.href = "./checkin.html";
+                        console.log("Attendance marked successfully:", result);
+                        console.log("User Object:", userObject);
+                        localStorage.setItem("User", userObject);
                         
                         showToast(result.message);
                         closeCamera();
