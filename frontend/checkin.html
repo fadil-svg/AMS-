@@ -85,62 +85,9 @@
         <div class="headline">Welcome</div>
       </div>
       <div class="card-body">
-<<<<<<< HEAD
         <p class="muted">You have successfully checked in.</p>
       </div>
     </div>
   </main>
-=======
-        <p class="muted">You have successfully checked in at </p>
-      </div>
-      
-
-  </div>
- 
-</main>
-
-  <script>
-  const params = new URLSearchParams(window.location.search);
-  const name = params.get('name') || 'Guest';
-
-
-  // function names(){
-    const names = ['Fadil', 'Hoseah', 'Zipporah', 'Taofeeq'];
-  //   return names;
-  // }
-  
-document.addEventListener('DOMContentLoaded', () => {
-
-    const headline = document.querySelector('.headline');
-    const card = document.querySelector('.card');
-    const muted = document.querySelector('.muted');
-
-  if (names.includes(name)) {
-      document.title = `Checkin - ${name}`;
-      headline.textContent = `✅ Welcome, ${name}!`
-      muted.textContent = `You have successfully checked in.`;
-      headline.style.display = 'block';
-      card.style.display = 'block';
-
-      if (timeElement) {
-        timeElement.textContent = `Check-in Time: ${currentTime}`;
-      }
-
-  } else {
-     window.location.href = "not-eligible.html";
-
-
-  }
-});
-
-  
-</script>
-  <!-- <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const card = document.querySelector('.card');
-      card.style.display = 'block';
-    });
-  </script> -->
->>>>>>> bc6fe0e1a5a694e8762247135d1dcbf7f4cb2e37
 </body>
 </html>
